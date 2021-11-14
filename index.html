@@ -5,68 +5,66 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="common.css">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/index.css">
     <title>Document</title>
 </head>
 
-<body>
+<body class="flex justifycenter aligncenter">
 
     <div class="GameContainer">
         <!-- This is the container for the game, max-wdith 1440px. Everything takes place in this-->
+        <div class="Game">
+            <div class="Navigation">
+                <!-- Small navbar at the top  of the playfield, made for settings and the title of the game-->
+                <div class="Title">The Machine</div>
+                <div class="Settings"></div>
+            </div>
 
-        <div class="Navigation">
-            <!-- Small navbar at the top  of the playfield, made for settings and the title of the game-->
-            <div class="Title">The Machine</div>
-            <div class="Settings"></div>
-        </div>
+            <div class="TextContainer">
+                <!-- This is where the text that the machine says are displayed-->
+                <div class="textarea">
+                    This is where the story is told and the Machine speaks
+                </div>
+            </div>
 
-        <div class="TextContainer">
-            <!-- This is where the text that the machine says are displayed-->
-            <div class="textarea">
-                This is where the story is told and the Machine speaks
+            <div class="ButtonContainer">
+                <!-- This is where the options to buy upgrades and unlocking new materials for speeding up production are-->
+                <div class="CoalContainer">
+                    <button class="UpgradeCoal"></button>
+
+                    <button class="UnlockCoal"></button>
+                </div>
+
+                <div class="IronContainer">
+                    <button class="UpgradeIron"></button>
+
+                    <button class="UnlockIron"></button>
+                </div>
+
+                <div class="SteelContainer">
+                    <button class="UpgradeSteel"></button>
+
+                    <button class="UnlockSteel"></button>
+                </div>
+
+                <div class="TitaniumContainer">
+                    <button class="UpgradeTitanium"></button>
+
+                    <button class="UnlockTitanium"></button>
+                </div>
+
+                <div class="DiamondContainer">
+                    <button class="UpgradeDiamond"></button>
+
+                    <button class="UnlockDiamond"></button>
+                </div>
+
+                <div class="GemContainer">
+                    <button class="UnlockGem"></button>
+                </div>
             </div>
         </div>
-
-        <div class="ButtonContainer">
-            <!-- This is where the options to buy upgrades and unlocking new materials for speeding up production are-->
-            <div class="CoalContainer">
-                <button class="UpgradeCoal"></button>
-
-                <button class="UnlockCoal"></button>
-            </div>
-
-            <div class="IronContainer">
-                <button class="UpgradeIron"></button>
-
-                <button class="UnlockIron"></button>
-            </div>
-
-            <div class="SteelContainer">
-                <button class="UpgradeSteel"></button>
-
-                <button class="UnlockSteel"></button>
-            </div>
-
-            <div class="TitaniumContainer">
-                <button class="UpgradeTitanium"></button>
-
-                <button class="UnlockTitanium"></button>
-            </div>
-
-            <div class="DiamondContainer">
-                <button class="UpgradeDiamond"></button>
-
-                <button class="UnlockDiamond"></button>
-            </div>
-
-            <div class="GemContainer">
-                <button class="UnlockGem"></button>
-            </div>
-        </div>
-
-
-
     </div>
 
 </body>
