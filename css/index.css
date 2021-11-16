@@ -14,23 +14,66 @@ body {
 .GameContainer {
     width: 1000px;
     height: 600px;
+    border: 1px white dashed;
 }
 
 .Game {
     width: 100%;
     height: 100%;
-    background-color: red;
+    background-color: black;
 }
 
 .Navigation {
     height: 25px;
     width: 980px;
-    background-color: blue;
     padding-right: 10px;
     padding-left: 10px;
     justify-content: space-between;
     display: flex;
     align-items: center;
+    border: 1px white dashed;
 }
 
-.Title {}
+.Title {
+    font-weight: 500;
+}
+
+.TextContainer {
+    width: 100%;
+    height: auto;
+    margin-top: 10vh;
+}
+
+.TextArea {}
+
+.ClickReminder {
+    margin-top: 10px;
+    visibility: hidden;
+}
+
+.ButtonContainer {
+    margin-top: 15vh;
+}
+
+.ButtonOrganizer {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.button {
+    background-color: black;
+}
+
+.GemContainer {
+    margin-top: 10vh;
+    visibility: hidden;
+}
+
+.Amount {
+    margin-bottom: 10px;
+}
+
+.CostAmount {
+    margin-bottom: 10px;
+}

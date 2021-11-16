@@ -32,47 +32,64 @@
                 <div class="Settings"><i class="fas fa-cog"></i></div>
             </div>
 
-            <div class="TextContainer">
+            <div class="TextContainer flex column aligncenter justifycenter">
                 <!-- This is where the text that the machine says are displayed-->
-                <div class="textarea">
-                    This is where the story is told and the Machine speaks
+                <div class="TextArea ">
+                    This is where the story is told and the Machine speaks...
+                </div>
+                <div class="ClickReminder MediumText">click anywhere to talk..</div>
+            </div>
+
+
+            <div class="GemContainer flex justifycenter">
+                <div class="GemOrganizer flex  column">
+                    <button class="UnlockGem button" disabled>Unlock The Gem</button>
+                    <div class="SmallText">Cost: 100 Diamond</div>
                 </div>
             </div>
 
-            <div class="ButtonContainer">
+            <div class="ButtonContainer absolute">
                 <!-- This is where the options to buy upgrades and unlocking new materials for speeding up production are-->
-                <div class="CoalContainer">
-                    <button class="UpgradeCoal"></button>
+                <div class="ButtonOrganizer">
+                    <div class="CoalContainer flex column">
+                        <div class="Amount SmallText flex justifycenter">Amount: 0</div>
+                        <button class="UpgradeCoal button" disabled>Upgrade</button>
+                        <div class="CostAmount SmallText flex justifycenter">Cost: 5 Coal</div>
+                        <button class="UnlockCoal button">Unlock Coal</button>
+                        <div class="SmallText flex justifycenter">Cost: Clothes</div>
+                    </div>
 
-                    <button class="UnlockCoal"></button>
-                </div>
+                    <div class="IronContainer flex column justifycenter">
+                        <div class="Amount SmallText flex justifycenter">Amount: 0</div>
+                        <button class="UpgradeIron button" disabled>Upgrade</button>
+                        <div class="CostAmount SmallText flex justifycenter">Cost: 5 Iron</div>
+                        <button class="UnlockIron button" disabled>Unlock Iron</button>
+                        <div class="CostText SmallText flex justifycenter">Cost: 100 Coal</div>
+                    </div>
 
-                <div class="IronContainer">
-                    <button class="UpgradeIron"></button>
+                    <div class="SteelContainer flex column">
+                        <div class="Amount SmallText flex justifycenter">Amount: 0</div>
+                        <button class="UpgradeSteel button" disabled>Upgrade</button>
+                        <div class="CostAmount SmallText flex justifycenter">Cost: 5 Steel</div>
+                        <button class="UnlockSteel button" disabled>Unlock Steel</button>
+                        <div class="CostText SmallText flex justifycenter">Cost: 100 Iron</div>
+                    </div>
 
-                    <button class="UnlockIron"></button>
-                </div>
+                    <div class="TitaniumContainer flex column">
+                        <div class="Amount SmallText flex justifycenter">Amount: 0</div>
+                        <button class="UpgradeTitanium button" disabled>Upgrade</button>
+                        <div class="CostAmount SmallText flex justifycenter">Cost: 5 Titanium</div>
+                        <button class="UnlockTitanium button" disabled>Unlock Titanium</button>
+                        <div class="CostText SmallText flex justifycenter">Cost: 100 Steel</div>
+                    </div>
 
-                <div class="SteelContainer">
-                    <button class="UpgradeSteel"></button>
-
-                    <button class="UnlockSteel"></button>
-                </div>
-
-                <div class="TitaniumContainer">
-                    <button class="UpgradeTitanium"></button>
-
-                    <button class="UnlockTitanium"></button>
-                </div>
-
-                <div class="DiamondContainer">
-                    <button class="UpgradeDiamond"></button>
-
-                    <button class="UnlockDiamond"></button>
-                </div>
-
-                <div class="GemContainer">
-                    <button class="UnlockGem"></button>
+                    <div class="DiamondContainer flex column">
+                        <div class="Amount SmallText flex justifycenter">Amount: 0</div>
+                        <button class="UpgradeDiamond button" disabled>Upgrade</button>
+                        <div class="CostAmount SmallText flex justifycenter">Cost: 5 Diamond</div>
+                        <button class="UnlockDiamond button" disabled>Unlock Diamond</button>
+                        <div class="CostText SmallText flex justifycenter">Cost: 100 Titanium</div>
+                    </div>
                 </div>
             </div>
         </div>

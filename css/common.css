@@ -2,10 +2,26 @@
     display: flex;
 }
 
+.absolute {
+    display: absolute;
+}
+
+.column {
+    flex-direction: column;
+}
+
 .justifycenter {
     justify-content: center;
 }
 
 .aligncenter {
     align-items: center;
+}
+
+.SmallText {
+    font-size: smaller;
+}
+
+.MediumText {
+    font-size: small;
 }
