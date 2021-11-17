@@ -25,3 +25,7 @@
 .MediumText {
     font-size: small;
 }
+
+.spacearound {
+    justify-content: space-around;
+}

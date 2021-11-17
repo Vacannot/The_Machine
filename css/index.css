@@ -44,7 +44,15 @@ body {
     margin-top: 10vh;
 }
 
-.TextArea {}
+.TextArea {
+    width: 60%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.options {
+    justify-content: space-evenly;
+}
 
 .ClickReminder {
     margin-top: 10px;
@@ -63,6 +71,11 @@ body {
 
 button {
     background-color: black;
+}
+
+.OptionsOrganizer {
+    width: 100%;
+    justify-content: space-evenly;
 }
 
 .GemContainer {
