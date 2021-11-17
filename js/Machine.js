@@ -6,8 +6,6 @@ let state = {}
 function StartGame() {
     state = {}
     ShowTextNode(1)
-
-
 }
 
 function ShowTextNode() {
@@ -31,27 +29,78 @@ function ShowTextNode() {
 }
 
 function showOption(option) {
-    return true
+    return option.requiredState == null || option.requiredState(state)
+}
+
+function selectOption(option) {
+    const nextTextNodeId = option.nextText
+    if (nextTextNodeId <= 0) {
+        return StartGame()
+    }
+    state = Object.assign(state, option.setState)
+    ShowTextNode(nextTextNodeId)
 }
 
 const TextNodes = [{
     id: 1,
-    text: "Goodmorning, You're finally awake",
+    text: "Goodmorning, You're finally awake.",
     options: [{
             text: "Where am i?",
-            setState: { WhereAm: true },
             nextText: 2
         },
         {
-            text: "Who are you?"
+            text: "Who are you?",
+            nextText: 3
         },
         {
-            text: "Stay quiet.."
+            text: "Stay quiet..",
+            setState: { quiet: true },
+            nextText: 4
         }
     ]
 }, {
     id: 2,
-    text: "You're home."
+    text: "You're down here with me, in the mine.",
+    options: [{
+        text: "Continue",
+        nextText: 5
+    }]
+}, {
+    id: 3,
+    text: "I am no one.",
+    options: [{
+        text: "Continue",
+        nextText: 5
+    }]
+}, {
+    id: 4,
+    text: "GOOOODMOOORNING, HELLOOO!!!",
+    options: [{
+        text: "Continue",
+        nextText: 5
+    }]
+}, {
+    id: 5,
+    text: "What's your name?",
+    options: [{
+        text: "Continue",
+        setState: { callName: true },
+        nextText: 5
+    }]
+}, {
+    id: 6,
+    text: "Welcome to the deep $name, this is our home.",
+    options: [{
+        text: "Continue",
+        nextText: 8
+    }]
+}, {
+    id: 7,
+    text: "Oh, now you can talk? Welcome to the deep $name, this is our home",
+    options: [{
+        text: "Continue",
+        nextText: 8
+    }]
 }]
 
 StartGame()
