@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/index.css">
 
@@ -15,6 +17,9 @@
 
     <!-- Icons from FontAwesome -->
     <script src="https://kit.fontawesome.com/7af5ad6a1c.js" crossorigin="anonymous"></script>
+
+    <!-- JS -->
+    <script src="./js/Machine.js" defer></script>
 
     <!-- Title of page-->
     <title>The Machine</title>
@@ -34,7 +39,7 @@
 
             <div class="TextContainer flex column aligncenter justifycenter">
                 <!-- This is where the text that the machine says are displayed-->
-                <div class="TextArea ">
+                <div class="TextArea" id="story">
                     This is where the story is told and the Machine speaks...
                 </div>
                 <div class="ClickReminder MediumText">click anywhere to talk..</div>
@@ -52,14 +57,16 @@
                 <!-- This is where the options to buy upgrades and unlocking new materials for speeding up production are-->
                 <div class="ButtonOrganizer">
                     <div class="CoalContainer flex column">
+                        <div class="Progressbar">ProgressbarCoal</div>
                         <div class="Amount SmallText flex justifycenter">Amount: 0</div>
                         <button class="UpgradeCoal button" disabled>Upgrade</button>
                         <div class="CostAmount SmallText flex justifycenter">Cost: 5 Coal</div>
-                        <button class="UnlockCoal button">Unlock Coal</button>
+                        <button class="UnlockCoal button" disabled>Unlock Coal</button>
                         <div class="SmallText flex justifycenter">Cost: Clothes</div>
                     </div>
 
                     <div class="IronContainer flex column justifycenter">
+                        <div class="Progressbar">ProgressbarCoal</div>
                         <div class="Amount SmallText flex justifycenter">Amount: 0</div>
                         <button class="UpgradeIron button" disabled>Upgrade</button>
                         <div class="CostAmount SmallText flex justifycenter">Cost: 5 Iron</div>
@@ -68,6 +75,7 @@
                     </div>
 
                     <div class="SteelContainer flex column">
+                        <div class="Progressbar">ProgressbarCoal</div>
                         <div class="Amount SmallText flex justifycenter">Amount: 0</div>
                         <button class="UpgradeSteel button" disabled>Upgrade</button>
                         <div class="CostAmount SmallText flex justifycenter">Cost: 5 Steel</div>
@@ -76,6 +84,7 @@
                     </div>
 
                     <div class="TitaniumContainer flex column">
+                        <div class="Progressbar">ProgressbarCoal</div>
                         <div class="Amount SmallText flex justifycenter">Amount: 0</div>
                         <button class="UpgradeTitanium button" disabled>Upgrade</button>
                         <div class="CostAmount SmallText flex justifycenter">Cost: 5 Titanium</div>
@@ -84,6 +93,7 @@
                     </div>
 
                     <div class="DiamondContainer flex column">
+                        <div class="Progressbar">ProgressbarCoal</div>
                         <div class="Amount SmallText flex justifycenter">Amount: 0</div>
                         <button class="UpgradeDiamond button" disabled>Upgrade</button>
                         <div class="CostAmount SmallText flex justifycenter">Cost: 5 Diamond</div>
