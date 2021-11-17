@@ -12,14 +12,11 @@ function startGame() {
 
 
 function lookForName() {
-    while (state.callName === false) {
-        console.log("We made it here atleast!")
-        if (state.callName == true) {
-            let playerName = prompt("Enter your name")
-            console.log(playerName)
-            return playerName
-            state.callName = false
-        }
+    console.log("We made it here atleast!")
+    if (state.callName == true) {
+        let playerName = prompt("Enter your name")
+        console.log(playerName)
+        return playerName
     }
 }
 
@@ -80,7 +77,7 @@ const textNodes = [{
         }]
     }, {
         id: 3,
-        text: "I am no one.",
+        text: "I don't have a name.",
         options: [{
             text: "Continue",
             nextText: 5
