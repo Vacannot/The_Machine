@@ -1,90 +1,286 @@
 const textElement = document.getElementById('story')
 const optionButtonsElement = document.getElementById('option-buttons')
 
-let coalCost = 10
-let coalLevel = 1
-let coalSum = 0
 let state = {}
 
+const storage = {
+    // Default values
+    coalCount: 0,
+    coalCost: 10,
+    coalLevel: 0,
+    coalDelay: 100,
+
+    ironCount: 0,
+    ironCost: 10,
+    ironLevel: 0,
+    ironDelay: 100,
+
+    steelCount: 0,
+    steelCost: 10,
+    steelLevel: 0,
+    steelDelay: 30000,
+
+    titaniumCount: 0,
+    titaniumCost: 10,
+    titaniumLevel: 0,
+    titaniumDelay: 120000,
+
+    diamondCount: 0,
+    diamondCost: 10,
+    diamondLevel: 0,
+    diamondDelay: 600000,
+    // Coal Setters & Getters
+    set setCoal(value) {
+        this.coalCount = value
+    },
+    get getCoal() {
+        return this.coalCount
+    },
+    set setCoalCost(value) {
+        this.coalCost = value
+    },
+    get getCoalCost() {
+        return this.coalCost
+    },
+    set setCoalLevel(value) {
+        this.coalLevel = value
+    },
+    get getCoalLevel() {
+        return this.coalLevel
+    },
+    set setCoalDelay(value) {
+        this.coalDelay = value
+    },
+    get getCoalDelay() {
+        return this.coalDelay
+    },
+    // Iron Setters & Getters
+    set setIron(value) {
+        this.ironCount = value
+    },
+    get getIron() {
+        return this.ironCount
+    },
+    set setIronCost(value) {
+        this.ironCost = value
+    },
+    get getIronCost() {
+        return this.ironCost
+    },
+    set setIronLevel(value) {
+        this.ironLevel = value
+    },
+    get getIronLevel() {
+        return this.ironLevel
+    },
+    set setIronDelay(value) {
+        this.ironDelay = value
+    },
+    get getIronDelay() {
+        return this.ironDelay
+    },
+    // Steel Setters & Getters
+    set setSteel(value) {
+        this.steelCount = value
+    },
+    get getSteel() {
+        return this.steelCount
+    },
+    set setSteelCost(value) {
+        this.steelCost = value
+    },
+    get getSteelCost() {
+        return this.steelCost
+    },
+    set setSteelLevel(value) {
+        this.steelLevel = value
+    },
+    get getSteelLevel() {
+        return this.steelLevel
+    },
+    set setSteelDelay(value) {
+        this.steelDelay = value
+    },
+    get getSteelDelay() {
+        return this.steelDelay
+    },
+    // Titanium Setters & Getters
+    set setTitanium(value) {
+        this.steelCount = value
+    },
+    get getTitanium() {
+        return this.titaniumCount
+    },
+    set setTitaniumCost(value) {
+        this.titaniumCost = value
+    },
+    get getTitaniumCost() {
+        return this.titaniumCost
+    },
+    set setTitaniumLevel(value) {
+        this.titaniumLevel = value
+    },
+    get getTitaniumLevel() {
+        return this.titaniumLevel
+    },
+    set setTitaniumDelay(value) {
+        this.titaniumDelay = value
+    },
+    get getTitaniumDelay() {
+        return this.titaniumDelay
+    },
+    // Diamond Setters & Getters
+    set setDiamond(value) {
+        this.steelCount = value
+    },
+    get getDiamond() {
+        return this.diamondCount
+    },
+    set setDiamondCost(value) {
+        this.diamondCost = value
+    },
+    get getDiamondCost() {
+        return this.diamondCost
+    },
+    set setDiamondLevel(value) {
+        this.diamondLevel = value
+    },
+    get getDiamondLevel() {
+        return this.diamondLevel
+    },
+    set setDiamondDelay(value) {
+        this.diamondDelay = value
+    },
+    get getDiamondDelay() {
+        return this.diamondDelay
+    },
+    // Gem Setters & Getters
+    set setGem(value) {
+        this.gemCount = value
+    },
+    get getGem() {
+        return this.gemCount
+    },
+
+}
+
+function reset() {
+    storage.setCoal = 0
+    storage.setCoalCost = 10
+    storage.setCoalLevel = 0
+
+    storage.setIron = 0
+    storage.setIronCost = 10
+    storage.setIronLevel = 0
+
+    storage.setSteel = 0
+    storage.setSteelCost = 10
+    storage.setSteelLevel = 0
+
+    storage.setTitanium = 0
+    storage.setTitaniumCost = 10
+    storage.setTitaniumLevel = 0
+
+    storage.setDiamond = 0
+    storage.setDiamondCost = 10
+    storage.setDiamondLevel = 0
+
+    storage.setGem = 0
+}
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function reset() {
-    coalSum = 0
-    ironSum = 0
-    steelSum = 0
-    titaniumSum = 0
-    diamondSum = 0
-    gemSum = 0
-
-    coalLevel = 0
-    coalCost = 10
-
-    ironLevel = 0
-    ironCost = 10
-
-    steelLevel = 0
-    steelCost = 10
-
-    titaniumLevel = 0
-    titaniumCost = 10
-
-    diamondLevel = 0
-    diamondCost = 10
-}
-
-
 function startGame() {
-    state = {
-        callName: false,
-        coal: false,
-        iron: false,
-        steel: false,
-        titanium: false,
-        diamond: false,
-        gem: false,
-    }
+    state = {}
     reset()
     showTextNode(1)
-    coal(coalLevel)
 }
 
-async function coal(coalLevel) {
+function round(number) {
+    return Number.parseFloat(number).toFixed(0)
+}
 
-    let coalTimer = 2000 * (coalLevel * 0.9)
+// Coal logic
+
+async function coal() {
+
+    let coalLevel = 1
+    let coalTimer = 1
 
     while (coalLevel >= 1) {
+
+        coalLevel = storage.getCoalLevel
+        coalTimer = storage.getCoalDelay
+
+        coalTimer = coalTimer * (0.9 ** coalLevel)
+
+
         addCoal()
-        console.log("big coal function")
+
+
+        console.log(storage.getCoal)
+        console.log(storage.getCoalLevel)
+        console.log(coalTimer)
         await sleep(coalTimer)
     }
 }
 
+function upgradeCoal() {
+
+    let currentCoal = storage.getCoal
+    let currentCost = storage.getCoalCost
+    let currentLevel = storage.getCoalLevel
+
+    if (currentCoal >= currentCost) {
+        currentLevel = currentLevel + 1
+        currentCoal = currentCoal - currentCost
+        currentCost = currentCost * 1.5
+
+        displayCoalCost()
+        displayCoal()
+
+        storage.setCoal = currentCoal
+        storage.setCoalCost = currentCost
+        storage.setCoalLevel = currentLevel
+
+        displayCoalCost()
+        displayCoal()
+    } else {
+        alert("You don't have enough coal to afford this upgrade")
+    }
+}
+
 function addCoal() {
-    coalSum = coalSum + 1
-    displayCoal(coalSum)
-    return coalSum
+    let coalCurrent = storage.getCoal
+    coalCurrent = coalCurrent + 1
+    storage.setCoal = coalCurrent
+    displayCoal()
+
+    if (storage.getCoal >= 100) {
+        unlockIronStoryButton()
+    }
 }
 
-function displayCoal(coalSum) {
+function displayCoal() {
     let coalElement = document.getElementById("coalSumText")
-    coalElement.innerText = "Amount: " + coalSum
+    coalElement.innerText = "Amount: " + round(storage.getCoal)
 }
 
-function displayCoalCost(coalCost) {
+function displayCoalCost() {
     let coalElement = document.getElementById("coalCostText")
-    coalElement.innerText = "Cost: " + coalCost + " Coal"
+    coalElement.innerText = "Cost: " + (round(storage.getCoalCost)) + " Coal"
 }
 
-function unlockCoal(coalLevel) {
+function unlockCoal() {
 
+    let coalLevel = storage.getCoalLevel
     if (coalLevel < 1) {
         coalLevel = coalLevel + 1
-        coal(coalLevel)
+        storage.setCoalLevel = coalLevel
+        coal()
         document.getElementById("unlockCoal").disabled = true
-        return coalLevel
     }
 }
 
@@ -93,22 +289,94 @@ function unlockCoalButton() {
     document.getElementById("upgradeCoal").disabled = false
 }
 
-function upgradeCoal(coalSum, coalCost) {
-    if (coalSum >= coalCost) {
-        coalLevel = coalLevel + 1
-        coalSum = coalSum - coalCost
-        coalCost = coalCost * 1.5
-        displayCoalCost(coalCost)
-        displayCoal(coalSum)
-        console.log(coalSum)
-        return coalSum, coalLevel, coalCost
-    } else {
-        alert("You don't have enough coal to afford this upgrade")
+// Iron logic
+
+async function iron() {
+
+    let ironLevel = 1
+    let ironTimer = 1
+
+    while (ironLevel >= 1) {
+
+        ironLevel = storage.getIronLevel
+        ironTimer = storage.getIronDelay
+
+        ironTimer = ironTimer * (0.9 ** ironLevel)
+        addIron()
+
+
+        console.log(storage.getIron)
+        console.log(storage.getIronLevel)
+        console.log(ironTimer)
+        await sleep(ironTimer)
     }
 }
 
+function upgradeIron() {
 
-function lookForName(textNodeIndex) {
+    let currentIron = storage.getIron
+    let currentCost = storage.getIronCost
+    let currentLevel = storage.getIronLevel
+
+    if (currentIron >= currentCost) {
+        currentLevel = currentLevel + 1
+        currentIron = currentIron - currentCost
+        currentCost = currentCost * 1.5
+
+        displayIronCost()
+        displayIron()
+
+        storage.setIron = currentIron
+        storage.setIronCost = currentCost
+        storage.setIronLevel = currentLevel
+
+        displayIronCost()
+        displayIron()
+    } else {
+        alert("You don't have enough iron to afford this upgrade")
+    }
+}
+
+function addIron() {
+    let ironCurrent = storage.getIron
+    ironCurrent = ironCurrent + 1
+    storage.setIron = ironCurrent
+    displayIron()
+}
+
+function displayIron() {
+    let ironElement = document.getElementById("ironSumText")
+    ironElement.innerText = "Amount: " + round(storage.getIron)
+}
+
+function displayIronCost() {
+    let ironElement = document.getElementById("ironCostText")
+    ironElement.innerText = "Cost: " + (round(storage.getIronCost)) + " Coal"
+}
+
+function unlockIron() {
+
+    let ironLevel = storage.getIronLevel
+    if (ironLevel < 1) {
+        ironLevel = ironLevel + 1
+        storage.setIronLevel = ironLevel
+        iron()
+        document.getElementById("unlockIron").disabled = true
+    }
+}
+
+function unlockIronButton() {
+    document.getElementById("unlockIron").disabled = false
+    document.getElementById("upgradeIron").disabled = false
+}
+
+function unlockIronStoryButton() {
+    document.getElementById("storyButton").disabled = false
+
+}
+
+
+function storyEvents(textNodeIndex) {
 
     if (textNodeIndex == 100) {
         let nameElement = document.getElementById("name")
@@ -122,6 +390,10 @@ function lookForName(textNodeIndex) {
         nameElement.innerText = playerName
     } else if (textNodeIndex == 12) {
         unlockCoalButton()
+    } else if (textNodeIndex == 13) {
+        document.getElementById("storyButton").disabled = true
+    } else if (textNodeIndex == 14) {
+        unlockIronButton()
     }
 }
 
@@ -137,9 +409,10 @@ function showTextNode(textNodeIndex) {
             const button = document.createElement('button')
             button.innerText = option.text
             button.classList.add('btn')
+            button.setAttribute("id", "storyButton")
             button.addEventListener('click', () => selectOption(option))
             optionButtonsElement.appendChild(button)
-            lookForName(textNodeIndex)
+            storyEvents(textNodeIndex)
         }
     })
 }
@@ -265,7 +538,6 @@ const textNodes = [{
         text: "You have 10 hours to complete the game, if you haven't completed the game before then, you die. The clock is ticking, get to work.",
         options: [{
             text: "Unlock Iron",
-            requiredState: (currentState) => currentState.iron,
             nextText: 14
         }]
     }, {
@@ -273,7 +545,6 @@ const textNodes = [{
         text: "Finally, making some progress. I'm waiting for that gem.",
         options: [{
             text: "Unlock Steel",
-            requiredState: (currentState) => currentState.steel,
             nextText: 15
         }]
     }, {
@@ -281,7 +552,6 @@ const textNodes = [{
         text: "Keep working, you're never going to survive at this pace.",
         options: [{
             text: "Unlock Titanium",
-            requiredState: (currentState) => currentState.titanium,
             nextText: 16
         }]
     }, {
@@ -289,7 +559,6 @@ const textNodes = [{
         text: "If i see you slack off one more time i'm turning of the lights.",
         options: [{
             text: "Unlock Diamond",
-            requiredState: (currentState) => currentState.diamond,
             nextText: 17
         }]
     }, {
@@ -297,7 +566,6 @@ const textNodes = [{
         text: "No one has ever made it this far, maybe you do have a chance at surviving.",
         options: [{
             text: "Unlock the Gem",
-            requiredState: (currentState) => currentState.gem,
             nextText: 18
         }]
     }, {
