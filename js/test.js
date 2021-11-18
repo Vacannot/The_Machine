@@ -1,15 +1,53 @@
 const textElement = document.getElementById('story')
 const optionButtonsElement = document.getElementById('option-buttons')
 
-let state = {}
-
-function startGame() {
-    state = {}
-    showTextNode(1)
-    lookForName()
+let state = {
+    callName: false,
+    coal: false,
+    iron: false,
+    steel: false,
+    titanium: false,
+    diamond: false,
+    gem: false,
 }
 
+function startGame() {
+    state = {
+        callName: false,
+        coal: false,
+        iron: false,
+        steel: false,
+        titanium: false,
+        diamond: false,
+        gem: false,
+    }
+    showTextNode(1)
+        //stateChange()
+    console.log(state)
 
+}
+
+function mine() {
+    if (state.coal == true) {
+        coal()
+    } else if (state.iron == true) {
+        iron()
+    } else if (state.steel == true) {
+        steel()
+    } else if (state.titanium == true) {
+        titanium()
+    } else if (state.diamond == true) {
+        diamond()
+    } else if (state.gem == true) {
+        gem()
+    } else {
+        return null
+    }
+}
+
+//function stateChange() {
+//    object.watch(state, lookForName)
+//}
 
 function lookForName() {
     console.log("We made it here atleast!")
@@ -64,7 +102,6 @@ const textNodes = [{
             },
             {
                 text: "Stay quiet..",
-                setState: { quiet: true },
                 nextText: 4
             }
         ]
@@ -90,6 +127,14 @@ const textNodes = [{
             nextText: 5
         }]
     }, {
+        id: 51,
+        text: "What's your name?",
+        options: [{
+            text: "Continue",
+            setState: { callName: true },
+            nextText: 52
+        }]
+    }, {
         id: 5,
         text: "What's your name?",
         options: [{
@@ -105,7 +150,7 @@ const textNodes = [{
             nextText: 8
         }]
     }, {
-        id: 7,
+        id: 52,
         text: "Oh, now you can talk? Welcome to the deep $name, this is our home.",
         options: [{
             text: "Continue",
@@ -147,7 +192,7 @@ const textNodes = [{
         text: "Your clothes? It will have to do. Everything you need is over there. Now get started before i have you strave.",
         options: [{
             text: "Unlock Coal",
-            setState: { coal: true, iron: false, steel: false, titanium: false, diamond: false, gem: false },
+            setState: { coal: true },
             nextText: 13
         }]
     }, {
