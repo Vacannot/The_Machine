@@ -4,6 +4,45 @@ const optionButtonsElement = document.getElementById('option-buttons')
 let state = {}
 
 const storage = {
+
+    // Unlocked states, setters & getters
+    unlockedOnceIron: false,
+    unlockedOnceSteel: false,
+    unlockedOnceTitanium: false,
+    unlockedOnceDiamond: false,
+    unlockedOnceGem: false,
+
+    set setUnlockedIron(value) {
+        this.unlockedOnceIron = value
+    },
+    get getUnlockedIron() {
+        return this.unlockedOnceIron
+    },
+    set setUnlockedSteel(value) {
+        this.unlockedOnceSteel = value
+    },
+    get getUnlockedSteel() {
+        return this.unlockedOnceSteel
+    },
+    set setUnlockedTitanium(value) {
+        this.unlockedOnceTitanium = value
+    },
+    get getUnlockedTitanium() {
+        return this.unlockedOnceTitanium
+    },
+    set setUnlockedDiamond(value) {
+        this.unlockedOnceDiamond = value
+    },
+    get getUnlockedDiamond() {
+        return this.unlockedOnceDiamond
+    },
+    set setUnlockedGem(value) {
+        this.unlockedOnceGem = value
+    },
+    get getUnlockedGem() {
+        return this.unlockedOnceGem
+    },
+
     // Default values
     coalCount: 0,
     coalCost: 10,
@@ -18,17 +57,17 @@ const storage = {
     steelCount: 0,
     steelCost: 10,
     steelLevel: 0,
-    steelDelay: 30000,
+    steelDelay: 100,
 
     titaniumCount: 0,
     titaniumCost: 10,
     titaniumLevel: 0,
-    titaniumDelay: 120000,
+    titaniumDelay: 100,
 
     diamondCount: 0,
     diamondCost: 10,
     diamondLevel: 0,
-    diamondDelay: 600000,
+    diamondDelay: 100,
     // Coal Setters & Getters
     set setCoal(value) {
         this.coalCount = value
@@ -106,7 +145,7 @@ const storage = {
     },
     // Titanium Setters & Getters
     set setTitanium(value) {
-        this.steelCount = value
+        this.titaniumCount = value
     },
     get getTitanium() {
         return this.titaniumCount
@@ -202,6 +241,11 @@ function round(number) {
     return Number.parseFloat(number).toFixed(0)
 }
 
+function unlockStoryButton() {
+    document.getElementById("storyButton").disabled = false
+}
+
+
 // Coal logic
 
 async function coal() {
@@ -216,13 +260,7 @@ async function coal() {
 
         coalTimer = coalTimer * (0.9 ** coalLevel)
 
-
         addCoal()
-
-
-        console.log(storage.getCoal)
-        console.log(storage.getCoalLevel)
-        console.log(coalTimer)
         await sleep(coalTimer)
     }
 }
@@ -253,13 +291,18 @@ function upgradeCoal() {
 }
 
 function addCoal() {
+
     let coalCurrent = storage.getCoal
     coalCurrent = coalCurrent + 1
     storage.setCoal = coalCurrent
     displayCoal()
 
-    if (storage.getCoal >= 100) {
-        unlockIronStoryButton()
+    let first = storage.getUnlockedIron
+
+    if (storage.getCoal >= 100 && first == false) {
+        unlockStoryButton()
+        storage.setUnlockedIron = true
+        console.log("You should only do this once dumb computer")
     }
 }
 
@@ -304,10 +347,6 @@ async function iron() {
         ironTimer = ironTimer * (0.9 ** ironLevel)
         addIron()
 
-
-        console.log(storage.getIron)
-        console.log(storage.getIronLevel)
-        console.log(ironTimer)
         await sleep(ironTimer)
     }
 }
@@ -338,10 +377,21 @@ function upgradeIron() {
 }
 
 function addIron() {
+
     let ironCurrent = storage.getIron
     ironCurrent = ironCurrent + 1
     storage.setIron = ironCurrent
     displayIron()
+
+    let first = storage.getUnlockedSteel
+
+    if (storage.getIron >= 100 && first == false) {
+        unlockStoryButton()
+        storage.setUnlockedSteel = true
+        console.log("You should only do this once dumb computer")
+    }
+
+
 }
 
 function displayIron() {
@@ -370,9 +420,265 @@ function unlockIronButton() {
     document.getElementById("upgradeIron").disabled = false
 }
 
-function unlockIronStoryButton() {
-    document.getElementById("storyButton").disabled = false
+// Steel logic
 
+async function steel() {
+
+    let steelLevel = 1
+    let steelTimer = 1
+
+    while (steelLevel >= 1) {
+
+        steelLevel = storage.getSteelLevel
+        steelTimer = storage.getSteelDelay
+
+        steelTimer = steelTimer * (0.9 ** steelLevel)
+        addSteel()
+
+        await sleep(steelTimer)
+    }
+}
+
+function upgradeSteel() {
+
+    let currentSteel = storage.getSteel
+    let currentCost = storage.getSteelCost
+    let currentLevel = storage.getSteelLevel
+
+    if (currentSteel >= currentCost) {
+        currentLevel = currentLevel + 1
+        currentSteel = currentSteel - currentCost
+        currentCost = currentCost * 1.5
+
+        displaySteelCost()
+        displaySteel()
+
+        storage.setSteel = currentSteel
+        storage.setSteelCost = currentCost
+        storage.setSteelLevel = currentLevel
+
+        displaySteelCost()
+        displaySteel()
+    } else {
+        alert("You don't have enough steel to afford this upgrade")
+    }
+}
+
+function addSteel() {
+    let steelCurrent = storage.getSteel
+    steelCurrent = steelCurrent + 1
+    storage.setSteel = steelCurrent
+    displaySteel()
+
+    let first = storage.getUnlockedTitanium
+
+    if (storage.getSteel >= 100 && first == false) {
+        unlockStoryButton()
+        storage.setUnlockedTitanium = true
+        console.log("You should only do this once dumb computer")
+    }
+
+
+}
+
+function displaySteel() {
+    let steelElement = document.getElementById("steelSumText")
+    steelElement.innerText = "Amount: " + round(storage.getSteel)
+}
+
+function displaySteelCost() {
+    let steelElement = document.getElementById("steelCostText")
+    steelElement.innerText = "Cost: " + (round(storage.getSteelCost)) + " Coal"
+}
+
+function unlockSteel() {
+
+    let steelLevel = storage.getSteelLevel
+    if (steelLevel < 1) {
+        steelLevel = steelLevel + 1
+        storage.setSteelLevel = steelLevel
+        steel()
+        document.getElementById("unlockSteel").disabled = true
+    }
+}
+
+function unlockSteelButton() {
+    document.getElementById("unlockSteel").disabled = false
+    document.getElementById("upgradeSteel").disabled = false
+}
+
+// Titanium logic
+
+async function titanium() {
+
+    let titaniumLevel = 1
+    let titaniumTimer = 1
+
+    while (titaniumLevel >= 1) {
+
+        titaniumLevel = storage.getTitaniumLevel
+        titaniumTimer = storage.getTitaniumDelay
+
+        titaniumTimer = titaniumTimer * (0.9 ** titaniumLevel)
+        addTitanium()
+
+        await sleep(titaniumTimer)
+    }
+}
+
+function upgradeTitanium() {
+
+    let currentTitanium = storage.getTitanium
+    let currentCost = storage.getTitaniumCost
+    let currentLevel = storage.getTitaniumLevel
+
+    if (currentTitanium >= currentCost) {
+        currentLevel = currentLevel + 1
+        currentTitanium = currentTitanium - currentCost
+        currentCost = currentCost * 1.5
+
+        displayTitaniumCost()
+        displayTitanium()
+
+        storage.setTitanium = currentTitanium
+        storage.setTitaniumCost = currentCost
+        storage.setTitaniumLevel = currentLevel
+
+        displayTitaniumCost()
+        displayTitanium()
+    } else {
+        alert("You don't have enough titanium to afford this upgrade")
+    }
+}
+
+function addTitanium() {
+    let titaniumCurrent = storage.getTitanium
+    titaniumCurrent = titaniumCurrent + 1
+    storage.setTitanium = titaniumCurrent
+    displayTitanium()
+
+    let first = storage.getUnlockedTitanium
+
+    if (storage.getTitanium >= 100 && first == false) {
+        unlockStoryButton()
+        storage.setUnlockedDiamond = true
+        console.log("You should only do this once dumb computer")
+    }
+
+
+}
+
+function displayTitanium() {
+    let titaniumElement = document.getElementById("titaniumSumText")
+    titaniumElement.innerText = "Amount: " + round(storage.getTitanium)
+}
+
+function displayTitaniumCost() {
+    let titaniumElement = document.getElementById("titaniumCostText")
+    titaniumElement.innerText = "Cost: " + (round(storage.getTitaniumCost)) + " Coal"
+}
+
+function unlockTitanium() {
+
+    let titaniumLevel = storage.getTitaniumLevel
+    if (titaniumLevel < 1) {
+        titaniumLevel = titaniumLevel + 1
+        storage.setTitaniumLevel = titaniumLevel
+        titanium()
+        document.getElementById("unlockTitanium").disabled = true
+    }
+}
+
+function unlockTitaniumButton() {
+    document.getElementById("unlockTitanium").disabled = false
+    document.getElementById("upgradeTitanium").disabled = false
+}
+
+// Diamond logic
+
+async function diamond() {
+
+    let diamondLevel = 1
+    let diamondTimer = 1
+
+    while (diamondLevel >= 1) {
+
+        diamondLevel = storage.getDiamondLevel
+        diamondTimer = storage.getDiamondDelay
+
+        diamondTimer = diamondTimer * (0.9 ** diamondLevel)
+        addDiamond()
+
+        await sleep(diamondTimer)
+    }
+}
+
+function upgradeDiamond() {
+
+    let currentDiamond = storage.getDiamond
+    let currentCost = storage.getDiamondCost
+    let currentLevel = storage.getDiamondLevel
+
+    if (currentDiamond >= currentCost) {
+        currentLevel = currentLevel + 1
+        currentDiamond = currentDiamond - currentCost
+        currentCost = currentCost * 1.5
+
+        displayDiamondCost()
+        displayDiamond()
+
+        storage.setDiamond = currentDiamond
+        storage.setDiamondCost = currentCost
+        storage.setDiamondLevel = currentLevel
+
+        displayDiamondCost()
+        displayDiamond()
+    } else {
+        alert("You don't have enough diamond to afford this upgrade")
+    }
+}
+
+function addDiamond() {
+    let diamondCurrent = storage.getDiamond
+    diamondCurrent = diamondCurrent + 1
+    storage.setDiamond = diamondCurrent
+    displayDiamond()
+
+    let first = storage.getUnlockedDiamond
+
+    if (storage.getDiamond >= 100 && first == false) {
+        unlockStoryButton()
+        storage.setUnlockedGem = true
+        console.log("Gem Unlocked")
+    }
+
+
+}
+
+function displayDiamond() {
+    let diamondElement = document.getElementById("diamondSumText")
+    diamondElement.innerText = "Amount: " + round(storage.getDiamond)
+}
+
+function displayDiamondCost() {
+    let diamondElement = document.getElementById("diamondCostText")
+    diamondElement.innerText = "Cost: " + (round(storage.getDiamondCost)) + " Coal"
+}
+
+function unlockDiamond() {
+
+    let diamondLevel = storage.getDiamondLevel
+    if (diamondLevel < 1) {
+        diamondLevel = diamondLevel + 1
+        storage.setDiamondLevel = diamondLevel
+        diamond()
+        document.getElementById("unlockDiamond").disabled = true
+    }
+}
+
+function unlockDiamondButton() {
+    document.getElementById("unlockDiamond").disabled = false
+    document.getElementById("upgradeDiamond").disabled = false
 }
 
 
@@ -394,6 +700,18 @@ function storyEvents(textNodeIndex) {
         document.getElementById("storyButton").disabled = true
     } else if (textNodeIndex == 14) {
         unlockIronButton()
+        document.getElementById("storyButton").disabled = true
+    } else if (textNodeIndex == 15) {
+        unlockSteelButton()
+        document.getElementById("storyButton").disabled = true
+    } else if (textNodeIndex == 16) {
+        document.getElementById("storyButton").disabled = true
+        unlockTitaniumButton()
+    } else if (textNodeIndex == 17) {
+        document.getElementById("storyButton").disabled = true
+        unlockDiamondButton()
+    } else {
+
     }
 }
 
