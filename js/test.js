@@ -56,23 +56,26 @@ async function coal(coalLevel) {
     let coalTimer = 2000 * (coalLevel * 0.9)
 
     while (coalLevel >= 1) {
-        coalSum = coalSum + 1
-        displayCoal(coalSum)
-        console.log(coalSum)
+        addCoal()
+        console.log("big coal function")
         await sleep(coalTimer)
     }
+}
+
+function addCoal() {
+    coalSum = coalSum + 1
+    displayCoal(coalSum)
+    return coalSum
 }
 
 function displayCoal(coalSum) {
     let coalElement = document.getElementById("coalSumText")
     coalElement.innerText = "Amount: " + coalSum
-
-    return coalSum
 }
 
 function displayCoalCost(coalCost) {
-    let coalElement = document.getElementById("coalSumText")
-    coalElement.innerText = "Cost: " + coalCost + "Coal"
+    let coalElement = document.getElementById("coalCostText")
+    coalElement.innerText = "Cost: " + coalCost + " Coal"
 }
 
 function unlockCoal(coalLevel) {
@@ -80,6 +83,7 @@ function unlockCoal(coalLevel) {
     if (coalLevel < 1) {
         coalLevel = coalLevel + 1
         coal(coalLevel)
+        document.getElementById("unlockCoal").disabled = true
         return coalLevel
     }
 }
@@ -96,7 +100,10 @@ function upgradeCoal(coalSum, coalCost) {
         coalCost = coalCost * 1.5
         displayCoalCost(coalCost)
         displayCoal(coalSum)
+        console.log(coalSum)
         return coalSum, coalLevel, coalCost
+    } else {
+        alert("You don't have enough coal to afford this upgrade")
     }
 }
 
@@ -250,8 +257,7 @@ const textNodes = [{
         id: 12,
         text: "Your clothes? It will have to do. Everything you need is over there. Now get started before i have you strave.",
         options: [{
-            text: "Unlock Coal",
-            setState: { coal: true },
+            text: "Continue",
             nextText: 13
         }]
     }, {
