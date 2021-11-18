@@ -1,15 +1,40 @@
 const textElement = document.getElementById('story')
 const optionButtonsElement = document.getElementById('option-buttons')
 
-let state = {
-    callName: false,
-    coal: false,
-    iron: false,
-    steel: false,
-    titanium: false,
-    diamond: false,
-    gem: false,
+let coalCost = 10
+let coalLevel = 1
+let coalSum = 0
+let state = {}
+
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+function reset() {
+    coalSum = 0
+    ironSum = 0
+    steelSum = 0
+    titaniumSum = 0
+    diamondSum = 0
+    gemSum = 0
+
+    coalLevel = 0
+    coalCost = 10
+
+    ironLevel = 0
+    ironCost = 10
+
+    steelLevel = 0
+    steelCost = 10
+
+    titaniumLevel = 0
+    titaniumCost = 10
+
+    diamondLevel = 0
+    diamondCost = 10
+}
+
 
 function startGame() {
     state = {
@@ -21,40 +46,75 @@ function startGame() {
         diamond: false,
         gem: false,
     }
+    reset()
     showTextNode(1)
-        //stateChange()
-    console.log(state)
-
+    coal(coalLevel)
 }
 
-function mine() {
-    if (state.coal == true) {
-        coal()
-    } else if (state.iron == true) {
-        iron()
-    } else if (state.steel == true) {
-        steel()
-    } else if (state.titanium == true) {
-        titanium()
-    } else if (state.diamond == true) {
-        diamond()
-    } else if (state.gem == true) {
-        gem()
-    } else {
-        return null
+async function coal(coalLevel) {
+
+    let coalTimer = 2000 * (coalLevel * 0.9)
+
+    while (coalLevel >= 1) {
+        coalSum = coalSum + 1
+        displayCoal(coalSum)
+        console.log(coalSum)
+        await sleep(coalTimer)
     }
 }
 
-//function stateChange() {
-//    object.watch(state, lookForName)
-//}
+function displayCoal(coalSum) {
+    let coalElement = document.getElementById("coalSumText")
+    coalElement.innerText = "Amount: " + coalSum
 
-function lookForName() {
-    console.log("We made it here atleast!")
-    if (state.callName == true) {
-        let playerName = prompt("Enter your name")
-        console.log(playerName)
-        return playerName
+    return coalSum
+}
+
+function displayCoalCost(coalCost) {
+    let coalElement = document.getElementById("coalSumText")
+    coalElement.innerText = "Cost: " + coalCost + "Coal"
+}
+
+function unlockCoal(coalLevel) {
+
+    if (coalLevel < 1) {
+        coalLevel = coalLevel + 1
+        coal(coalLevel)
+        return coalLevel
+    }
+}
+
+function unlockCoalButton() {
+    document.getElementById("unlockCoal").disabled = false
+    document.getElementById("upgradeCoal").disabled = false
+}
+
+function upgradeCoal(coalSum, coalCost) {
+    if (coalSum >= coalCost) {
+        coalLevel = coalLevel + 1
+        coalSum = coalSum - coalCost
+        coalCost = coalCost * 1.5
+        displayCoalCost(coalCost)
+        displayCoal(coalSum)
+        return coalSum, coalLevel, coalCost
+    }
+}
+
+
+function lookForName(textNodeIndex) {
+
+    if (textNodeIndex == 100) {
+        let nameElement = document.getElementById("name")
+        nameElement.innerText = ""
+
+    } else if (textNodeIndex == 6) {
+        let playerNamePrompt = prompt("Enter your name")
+        playerName = playerNamePrompt
+
+        let nameElement = document.getElementById("name")
+        nameElement.innerText = playerName
+    } else if (textNodeIndex == 12) {
+        unlockCoalButton()
     }
 }
 
@@ -72,6 +132,7 @@ function showTextNode(textNodeIndex) {
             button.classList.add('btn')
             button.addEventListener('click', () => selectOption(option))
             optionButtonsElement.appendChild(button)
+            lookForName(textNodeIndex)
         }
     })
 }
@@ -131,7 +192,6 @@ const textNodes = [{
         text: "What's your name?",
         options: [{
             text: "Continue",
-            setState: { callName: true },
             nextText: 52
         }]
     }, {
@@ -139,12 +199,11 @@ const textNodes = [{
         text: "What's your name?",
         options: [{
             text: "Continue",
-            setState: { callName: true },
             nextText: 6
         }]
     }, {
         id: 6,
-        text: "Welcome to the deep $name, this is our home.",
+        text: "Welcome to the deep young one, this is our home.",
         options: [{
             text: "Continue",
             nextText: 8
