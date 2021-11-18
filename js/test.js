@@ -170,7 +170,7 @@ const storage = {
     },
     // Diamond Setters & Getters
     set setDiamond(value) {
-        this.steelCount = value
+        this.diamondCount = value
     },
     get getDiamond() {
         return this.diamondCount
@@ -557,7 +557,7 @@ function addTitanium() {
     storage.setTitanium = titaniumCurrent
     displayTitanium()
 
-    let first = storage.getUnlockedTitanium
+    let first = storage.getUnlockedDiamond
 
     if (storage.getTitanium >= 100 && first == false) {
         unlockStoryButton()
@@ -644,7 +644,9 @@ function addDiamond() {
     storage.setDiamond = diamondCurrent
     displayDiamond()
 
-    let first = storage.getUnlockedDiamond
+    let first = storage.getUnlockedGem
+
+    console.log("--")
 
     if (storage.getDiamond >= 100 && first == false) {
         unlockStoryButton()
@@ -681,6 +683,8 @@ function unlockDiamondButton() {
     document.getElementById("upgradeDiamond").disabled = false
 }
 
+// Gem logic
+
 
 function storyEvents(textNodeIndex) {
 
@@ -710,9 +714,7 @@ function storyEvents(textNodeIndex) {
     } else if (textNodeIndex == 17) {
         document.getElementById("storyButton").disabled = true
         unlockDiamondButton()
-    } else {
-
-    }
+    } else {}
 }
 
 function showTextNode(textNodeIndex) {
@@ -874,7 +876,7 @@ const textNodes = [{
         }]
     }, {
         id: 16,
-        text: "If i see you slack off one more time i'm turning of the lights.",
+        text: "If i see you slack off one more time i'm turning off the lights.",
         options: [{
             text: "Unlock Diamond",
             nextText: 17
@@ -902,6 +904,79 @@ const textNodes = [{
         }, {
             text: "Keep the gem to yourself",
             nextText: 21
+        }]
+    }, {
+        id: 20,
+        text: "You give the gem to the Machine, it quickly snatches it away",
+        options: [{
+            text: "Continue",
+            nextText: 22
+        }, ]
+    }, {
+        id: 21,
+        text: "You keep the gem to yourself, you found it after all. It is yours.",
+        options: [{
+            text: "Continue",
+            nextText: 23
+        }]
+    }, {
+        id: 22,
+        text: "Come here, come over here. I'll let you out now.",
+        options: [{
+            text: "Continue",
+            nextText: 24
+        }]
+    }, {
+        id: 23,
+        text: "YOU WILL NOT LIVE FOR LONG, ENJOY THE TIME YOU HAVE WITH MY GEM.",
+        options: [{
+            text: "Fight the Machine",
+            nextText: 25,
+        }, {
+            text: "Run away from the Machine, into the depths of the pitch black mines",
+            nextText: 26
+        }]
+    }, {
+        id: 24,
+        text: "The machine lets you into a little room and you feel your feet tremble and legs get weaker as the Machine rapidly brings you to the surface",
+        options: [{
+            text: "Continue",
+            nextText: 27
+        }]
+    }, {
+        id: 25,
+        text: "The Machine is far too study for you to hurt it, your attempt is futile. It kills you swiftly.",
+        options: [{
+            text: "Continue",
+            nextText: 100,
+        }]
+    }, {
+        id: 26,
+        text: "You run away from the Machine into the dark, you can't go back. You die by starvation holding your gem until your very last breath",
+        options: [{
+            text: "Continue",
+            nextText: 100
+        }]
+    }, {
+        id: 27,
+        text: "You feel the air getting warmer and the speed at which you're travelling decrease, you're almost there",
+        options: [{
+            text: "Continue",
+            nextText: 28
+        }]
+    }, {
+        id: 28,
+        text: "Thank you for your service young one, welcome out haha ha ha h...",
+        options: [{
+            text: "Continue",
+            nextText: 29
+        }]
+    }, {
+        id: 29,
+        text: "There is nothing. The surface is scorching how and there is nothing but sand and dust. You die from radiation wihtin the hour.",
+        options: [{
+            text: "Continue",
+            nextText: 100,
         }]
     }
 
