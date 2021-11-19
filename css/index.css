@@ -1,3 +1,6 @@
+/* Universal css, resets margin & padding and sets the font family and text color so
+they're the same everywhere. */
+
 * {
     margin: 0;
     padding: 0;
@@ -5,11 +8,24 @@
     font-family: 'Fira Code', monospace;
 }
 
+
+/* Body css, sets it to full screen and makes it black */
+
 body {
     background-color: black;
     width: 100vw;
     height: 100vh;
 }
+
+
+/* general styling for buttons */
+
+button {
+    background-color: black;
+}
+
+
+/* GameContainer, makes it 1000px wide and 600px high and gives a dashed border */
 
 .GameContainer {
     width: 1000px;
@@ -17,16 +33,16 @@ body {
     border: 1px white dashed;
 }
 
+
+/* Sets the background of the game to the fullsize of the game container */
+
 .Game {
     width: 100%;
     height: 100%;
-    background-color: black;
 }
 
-.Name {
-    overflow: visible;
-    width: 1px;
-}
+
+/* General styling of the navigation bar */
 
 .Navigation {
     height: 25px;
@@ -34,23 +50,34 @@ body {
     padding-right: 10px;
     padding-left: 10px;
     justify-content: space-between;
-    display: flex;
-    align-items: center;
     border: 1px white dashed;
 }
+
+
+/* Makes the users name not change the layout of the navigation bar */
+
+.Name {
+    overflow: visible;
+    width: 1px;
+}
+
+
+/* Sets the placement and stlying of the countdown timer */
 
 .Countdown {
     height: 20px;
     width: 1000px;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    text-align: center;
 }
+
+
+/* Sets the size of the Title of the game */
 
 .Title {
     font-weight: 500;
 }
+
+
+/* Sets the width and height and placement of the textcontainer, the story and option buttons are in here. */
 
 .TextContainer {
     width: 100%;
@@ -58,55 +85,92 @@ body {
     margin-top: 10vh;
 }
 
-.TextArea {
-    width: 60%;
-    text-align: center;
-    margin-bottom: 80px;
-    height: 20px;
-    overflow: visible;
-}
 
-.Progressbar {
-    text-align: center;
-}
-
-.options {
-    justify-content: space-evenly;
-}
-
-.ClickReminder {
-    margin-top: 10px;
-    visibility: hidden;
-}
-
-.ButtonContainer {
-    margin-top: 5vh;
-}
-
-.ButtonOrganizer {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-button {
-    background-color: black;
-}
+/* styling of the options buttons that appear */
 
 .OptionsOrganizer {
     width: 100%;
     justify-content: space-evenly;
 }
 
-.GemContainer {
-    margin-top: 10vh;
-    visibility: hidden;
+
+/* Styling of the text area, this is where the story is told, makes it so it doesn't move the rest of the
+elements whenever there is a lot of text */
+
+.TextArea {
+    width: 60%;
+    margin-bottom: 80px;
+    height: 20px;
+    overflow: visible;
 }
+
+
+/* placement of the options buttons */
+
+.options {
+    justify-content: space-evenly;
+}
+
+
+/* placement of the buttons for upgrading and unlocking ores */
+
+.ButtonContainer {
+    margin-top: 5vh;
+}
+
+
+/* placement of the buttons for upgrading and unlocking ores */
+
+.ButtonOrganizer {
+    justify-content: space-evenly;
+}
+
+
+/* sets margin beneath the Amount sum of the current ores */
 
 .Amount {
     margin-bottom: 10px;
 }
 
+
+/* sets margin beneath the CostCurrent sum of the current ores */
+
 .CostAmount {
     margin-bottom: 10px;
+}
+
+
+/* The Modal (background) */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    margin-top: -30vh;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+
+/* Modal Content */
+
+.modalcontent {
+    justify-content: space-between;
+    background-color: black;
+    margin: auto;
+    padding: 20px;
+    border: 1px dashed;
+    width: 30%;
+}
+
+
+/* The Close Button */
+
+.close {
+    color: white;
+    float: right;
+    font-size: 40px;
+    font-weight: bold;
 }

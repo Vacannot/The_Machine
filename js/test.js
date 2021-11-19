@@ -1,7 +1,17 @@
+/**
+ * constant containing the element with the id "story" which is used to display text
+ */
 const textElement = document.getElementById('story')
+    /**
+     * constant containing the elements with the id "option-buttons" which the user uses to navigate the story
+     */
 const optionButtonsElement = document.getElementById('option-buttons')
 
-let state = {}
+
+/**
+ * Contains values for each ore with corresponding getters & setters
+ * and also values for whether or not they've been unlocked or not.
+ */
 
 const storage = {
 
@@ -43,7 +53,7 @@ const storage = {
         return this.unlockedOnceGem
     },
 
-    // Default values
+    // Default values for each ore
     coalCount: 0,
     coalCost: 10,
     coalLevel: 0,
@@ -68,6 +78,8 @@ const storage = {
     diamondCost: 10,
     diamondLevel: 0,
     diamondDelay: 1000,
+
+    // Setters & Getters for each ore
     // Coal Setters & Getters
     set setCoal(value) {
         this.coalCount = value
@@ -203,30 +215,50 @@ const storage = {
 
 }
 
+/** 
+ * Reloads the page when requested to reset the game if the player died
+ */
 function reset() {
 
     location.reload()
 
 }
-
+/**  
+ * Adds a delay / sleep equally long to the miliseconds alloted to it
+ * @param  {} ms miliseconds
+ */
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-
+/**
+ * Starts the game, starts the story from the first node and starts the countdown timer also adds a EventListeniner to
+ * the cogwheel / id="password" element and enterPassword element / button to look if the user clicks them.
+ */
 function startGame() {
-    state = {}
     showTextNode(1)
     countdownTimer()
-}
+    document.getElementById("input").addEventListener("click", input)
 
+    document.getElementById("enterPassword").addEventListener("click", password)
+}
+/**
+ * Rounds numbers upwards so they don't have any decimals
+ * 
+ * @param  {} number Takes any number
+ */
 function round(number) {
     return Number.parseFloat(number).toFixed(0)
 }
-
+/**
+ * 
+ * Unlocks the button to continue the story if it is locked
+ */
 function unlockStoryButton() {
     document.getElementById("storyButton").disabled = false
 }
-
+/**
+ * Creates a countdown that's 10 hours long for the user to complete the game.
+ */
 function countdownTimer() {
     const countTime = new Date()
     let time = countTime.getTime()
@@ -265,7 +297,10 @@ function countdownTimer() {
 
 
 // Coal logic
-
+/**
+ * Sets the level of the coal ore to 1 and sets the time on how long it takes to generate
+ * a coal depending on the level of the ore. Generates coal using addCoal()
+ */
 async function coal() {
 
     let coalLevel = 1
@@ -282,7 +317,12 @@ async function coal() {
         await sleep(coalTimer)
     }
 }
-
+/**
+ * Upgrades the ore, updates the numbers on the screen using displayCoalCost() & displayCoal()
+ * Levels up the ore once and increases the price for upgrading it again and removes what it cost to upgrade
+ * it from the current amount of owned ore. If the user can't afford an upgrade it displays an alert with that information.
+ * 
+ */
 function upgradeCoal() {
 
     let currentCoal = storage.getCoal
@@ -304,7 +344,10 @@ function upgradeCoal() {
         alert("You don't have enough coal to afford this upgrade")
     }
 }
-
+/**
+ *  Adds ore the the total amount of ore and updates the game with displayCoal(), also checks if the user
+ *  has managed to store a total of 100 ore to unlock the next relevant ore.
+ */
 function addCoal() {
 
     let coalCurrent = storage.getCoal
@@ -319,17 +362,23 @@ function addCoal() {
         storage.setUnlockedIron = true
     }
 }
-
+/**
+ * Updates what's shown on screen with the current amount of relevant ore
+ */
 function displayCoal() {
     let coalElement = document.getElementById("coalSumText")
     coalElement.innerText = "Amount: " + round(storage.getCoal)
 }
-
+/**
+ * Updates what's shown on screen with the current cost of this ore
+ */
 function displayCoalCost() {
     let coalElement = document.getElementById("coalCostText")
     coalElement.innerText = "Cost: " + (round(storage.getCoalCost)) + " Coal"
 }
-
+/**
+ * Unlocks relevant ore if criterias are met and also hides text on screen with the criterias
+ */
 function unlockCoal() {
 
     let coalLevel = storage.getCoalLevel
@@ -341,14 +390,19 @@ function unlockCoal() {
         document.getElementById("unlockCoalCost").classList.add("hidden")
     }
 }
-
+/**
+ * Unlocks the relevant ore buttons when asked upon
+ */
 function unlockCoalButton() {
     document.getElementById("unlockCoal").disabled = false
     document.getElementById("upgradeCoal").disabled = false
 }
 
 // Iron logic
-
+/**
+ * Sets the level of the iron ore to 1 and sets the time on how long it takes to generate
+ * a iron depending on the level of the ore. Generates iron using addIron()
+ */
 async function iron() {
 
     let ironLevel = 1
@@ -365,7 +419,12 @@ async function iron() {
         await sleep(ironTimer)
     }
 }
-
+/**
+ * Upgrades the ore, updates the numbers on the screen using displayIronCost() & displayIron()
+ * Levels up the ore once and increases the price for upgrading it again and removes what it cost to upgrade
+ * it from the current amount of owned ore. If the user can't afford an upgrade it displays an alert with that information.
+ * 
+ */
 function upgradeIron() {
 
     let currentIron = storage.getCoal
@@ -387,7 +446,10 @@ function upgradeIron() {
         alert("You don't have enough iron to afford this upgrade")
     }
 }
-
+/**
+ *  Adds ore the the total amount of ore and updates the game with displayIron(), also checks if the user
+ *  has managed to store a total of 100 ore to unlock the next relevant ore.
+ */
 function addIron() {
 
     let ironCurrent = storage.getIron
@@ -404,17 +466,23 @@ function addIron() {
 
 
 }
-
+/**
+ * Updates what's shown on screen with the current amount of relevant ore
+ */
 function displayIron() {
     let ironElement = document.getElementById("ironSumText")
     ironElement.innerText = "Amount: " + round(storage.getIron)
 }
-
+/**
+ * Updates what's shown on screen with the current cost of this ore
+ */
 function displayIronCost() {
     let ironElement = document.getElementById("ironCostText")
     ironElement.innerText = "Cost: " + (round(storage.getIronCost)) + " Coal"
 }
-
+/**
+ * Unlocks relevant ore if criterias are met and also hides text on screen with the criterias
+ */
 function unlockIron() {
     let currentIron = storage.getCoal
     let ironLevel = storage.getIronLevel
@@ -428,14 +496,19 @@ function unlockIron() {
         document.getElementById("unlockIronCost").classList.add("hidden")
     }
 }
-
+/**
+ * Unlocks the relevant ore buttons when asked upon
+ */
 function unlockIronButton() {
     document.getElementById("unlockIron").disabled = false
     document.getElementById("upgradeIron").disabled = false
 }
 
 // Steel logic
-
+/**
+ * Sets the level of the steel ore to 1 and sets the time on how long it takes to generate
+ * a steel depending on the level of the ore. Generates steel using addSteel()
+ */
 async function steel() {
 
     let steelLevel = 1
@@ -452,7 +525,12 @@ async function steel() {
         await sleep(steelTimer)
     }
 }
-
+/**
+ * Upgrades the ore, updates the numbers on the screen using displaySteelCost() & displaySteel()
+ * Levels up the ore once and increases the price for upgrading it again and removes what it cost to upgrade
+ * it from the current amount of owned ore. If the user can't afford an upgrade it displays an alert with that information.
+ * 
+ */
 function upgradeSteel() {
 
     let currentSteel = storage.getIron
@@ -474,7 +552,10 @@ function upgradeSteel() {
         alert("You don't have enough steel to afford this upgrade")
     }
 }
-
+/**
+ *  Adds ore the the total amount of ore and updates the game with displaySteel(), also checks if the user
+ *  has managed to store a total of 100 ore to unlock the next relevant ore.
+ */
 function addSteel() {
     let steelCurrent = storage.getSteel
     steelCurrent = steelCurrent + 1
@@ -490,17 +571,23 @@ function addSteel() {
 
 
 }
-
+/**
+ * Updates what's shown on screen with the current amount of relevant ore
+ */
 function displaySteel() {
     let steelElement = document.getElementById("steelSumText")
     steelElement.innerText = "Amount: " + round(storage.getSteel)
 }
-
+/**
+ * Updates what's shown on screen with the current cost of this ore
+ */
 function displaySteelCost() {
     let steelElement = document.getElementById("steelCostText")
     steelElement.innerText = "Cost: " + (round(storage.getSteelCost)) + " Iron"
 }
-
+/**
+ * Unlocks relevant ore if criterias are met and also hides text on screen with the criterias
+ */
 function unlockSteel() {
 
     let currentIron = storage.getIron
@@ -518,14 +605,19 @@ function unlockSteel() {
         document.getElementById("unlockSteelCost").classList.add("hidden")
     }
 }
-
+/**
+ * Unlocks the relevant ore buttons when asked upon
+ */
 function unlockSteelButton() {
     document.getElementById("unlockSteel").disabled = false
     document.getElementById("upgradeSteel").disabled = false
 }
 
 // Titanium logic
-
+/**
+ * Sets the level of the titanium ore to 1 and sets the time on how long it takes to generate
+ * a titanium depending on the level of the ore. Generates titanium using addTitanium()
+ */
 async function titanium() {
 
     let titaniumLevel = 1
@@ -542,7 +634,12 @@ async function titanium() {
         await sleep(titaniumTimer)
     }
 }
-
+/**
+ * Upgrades the ore, updates the numbers on the screen using displayTitaniumCost() & displayTitanium()
+ * Levels up the ore once and increases the price for upgrading it again and removes what it cost to upgrade
+ * it from the current amount of owned ore. If the user can't afford an upgrade it displays an alert with that information.
+ * 
+ */
 function upgradeTitanium() {
 
     let currentTitanium = storage.getSteel
@@ -564,7 +661,10 @@ function upgradeTitanium() {
         alert("You don't have enough titanium to afford this upgrade")
     }
 }
-
+/**
+ *  Adds ore the the total amount of ore and updates the game with displayTitanium(), also checks if the user
+ *  has managed to store a total of 100 ore to unlock the next relevant ore.
+ */
 function addTitanium() {
     let titaniumCurrent = storage.getTitanium
     titaniumCurrent = titaniumCurrent + 1
@@ -580,17 +680,23 @@ function addTitanium() {
 
 
 }
-
+/**
+ * Updates what's shown on screen with the current amount of relevant ore
+ */
 function displayTitanium() {
     let titaniumElement = document.getElementById("titaniumSumText")
     titaniumElement.innerText = "Amount: " + round(storage.getTitanium)
 }
-
+/**
+ * Updates what's shown on screen with the current cost of this ore
+ */
 function displayTitaniumCost() {
     let titaniumElement = document.getElementById("titaniumCostText")
     titaniumElement.innerText = "Cost: " + (round(storage.getTitaniumCost)) + " Steel"
 }
-
+/**
+ * Unlocks relevant ore if criterias are met and also hides text on screen with the criterias
+ */
 function unlockTitanium() {
     let currentSteel = storage.getSteel
     let titaniumLevel = storage.getTitaniumLevel
@@ -604,14 +710,19 @@ function unlockTitanium() {
         document.getElementById("unlockTitaniumCost").classList.add("hidden")
     }
 }
-
+/**
+ * Unlocks the relevant ore buttons when asked upon
+ */
 function unlockTitaniumButton() {
     document.getElementById("unlockTitanium").disabled = false
     document.getElementById("upgradeTitanium").disabled = false
 }
 
 // Diamond logic
-
+/**
+ * Sets the level of the diamond ore to 1 and sets the time on how long it takes to generate
+ * a diamond depending on the level of the ore. Generates diamond using addDiamond()
+ */
 async function diamond() {
 
     let diamondLevel = 1
@@ -628,7 +739,12 @@ async function diamond() {
         await sleep(diamondTimer)
     }
 }
-
+/**
+ * Upgrades the ore, updates the numbers on the screen using displayDiamondCost() & displayDiamond()
+ * Levels up the ore once and increases the price for upgrading it again and removes what it cost to upgrade
+ * it from the current amount of owned ore. If the user can't afford an upgrade it displays an alert with that information.
+ * 
+ */
 function upgradeDiamond() {
 
     let currentDiamond = storage.getTitanium
@@ -650,7 +766,10 @@ function upgradeDiamond() {
         alert("You don't have enough diamond to afford this upgrade")
     }
 }
-
+/**
+ *  Adds ore the the total amount of ore and updates the game with displayDiamond(), also checks if the user
+ *  has managed to store a total of 100 ore to unlock the next relevant ore.
+ */
 function addDiamond() {
     let diamondCurrent = storage.getDiamond
     diamondCurrent = diamondCurrent + 1
@@ -666,17 +785,23 @@ function addDiamond() {
 
 
 }
-
+/**
+ * Updates what's shown on screen with the current amount of relevant ore
+ */
 function displayDiamond() {
     let diamondElement = document.getElementById("diamondSumText")
     diamondElement.innerText = "Amount: " + round(storage.getDiamond)
 }
-
+/**
+ * Updates what's shown on screen with the current cost of this ore
+ */
 function displayDiamondCost() {
     let diamondElement = document.getElementById("diamondCostText")
     diamondElement.innerText = "Cost: " + (round(storage.getDiamondCost)) + " Titanium"
 }
-
+/**
+ * Unlocks relevant ore if criterias are met and also hides text on screen with the criterias
+ */
 function unlockDiamond() {
 
     let currentTitanium = storage.getTitanium
@@ -694,15 +819,19 @@ function unlockDiamond() {
         document.getElementById("unlockDiamondCost").classList.add("hidden")
     }
 }
-
+/**
+ * Unlocks the relevant ore buttons when asked upon
+ */
 function unlockDiamondButton() {
     document.getElementById("unlockDiamond").disabled = false
     document.getElementById("upgradeDiamond").disabled = false
 }
 
-// Gem logic
-
-
+// Story logic
+/**
+ * Puts the user through different events based on where in the story the user is
+ * @param  {} textNodeIndex Current nodeIndex of the story
+ */
 function storyEvents(textNodeIndex) {
 
 
@@ -735,7 +864,10 @@ function storyEvents(textNodeIndex) {
 
     }
 }
-
+/**
+ * Shows the text corresponding to the current place in the story
+ * @param  {} textNodeIndex Current nodeIndex of the story
+ */
 function showTextNode(textNodeIndex) {
     const textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
     textElement.innerText = textNode.text
@@ -744,31 +876,32 @@ function showTextNode(textNodeIndex) {
     }
 
     textNode.options.forEach(option => {
-        if (showOption(option)) {
-            const button = document.createElement('button')
-            button.innerText = option.text
-            button.classList.add('btn')
-            button.setAttribute("id", "storyButton")
-            button.addEventListener('click', () => selectOption(option))
-            optionButtonsElement.appendChild(button)
-            storyEvents(textNodeIndex)
-        }
+
+        const button = document.createElement('button')
+        button.innerText = option.text
+        button.classList.add('btn')
+        button.setAttribute("id", "storyButton")
+        button.addEventListener('click', () => selectOption(option))
+        optionButtonsElement.appendChild(button)
+        storyEvents(textNodeIndex)
+
     })
 }
 
-function showOption(option) {
-    return option.requiredState == null || option.requiredState(state)
-}
-
+/**
+ * Selects the option the user has clicked on and passes him to the corresopnding node 
+ * @param  {} option The option the user chose
+ */
 function selectOption(option) {
     const nextTextNodeId = option.nextText
     if (nextTextNodeId <= 0) {
         return reset()
     }
-    state = Object.assign(state, option.setState)
     showTextNode(nextTextNodeId)
 }
-
+/**
+ * Array of the different node stages that the user can navigate through and their corresponding optional paths
+ */
 const textNodes = [{
         id: 1,
         text: "Goodmorning, You're finally awake.",
@@ -1008,5 +1141,42 @@ const textNodes = [{
         }]
     }
 ]
+
+// Input logic
+
+/**
+ * Opens and closes a modal containing a textfield
+ */
+function input() {
+    // Get the modal
+    let modal = document.getElementById("modal");
+
+    modal.style.display = "flex";
+
+    // Get the <span> element that closes the modal
+    let span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+}
+/**
+ * Takes the text from an input field and test if it contains the correct string to win the game
+ */
+function password() {
+    let password = "Password"
+    let answer = document.getElementById("inputAnswer").value
+    if (answer == password) {
+        alert("You won!")
+    }
+}
 
 startGame()

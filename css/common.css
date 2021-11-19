@@ -1,3 +1,6 @@
+/* Commonly used css attributes in their own class for easier
+and faster coding, names are selfexplanatory */
+
 .flex {
     display: flex;
 }
@@ -32,4 +35,12 @@
 
 .hidden {
     visibility: hidden;
+}
+
+.blacktext {
+    color: black;
+}
+
+.textcenter {
+    text-align: center;
 }
