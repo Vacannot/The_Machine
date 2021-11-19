@@ -57,27 +57,27 @@ const storage = {
     coalCount: 0,
     coalCost: 10,
     coalLevel: 0,
-    coalDelay: 1000,
+    coalDelay: 5000,
 
     ironCount: 0,
     ironCost: 10,
     ironLevel: 0,
-    ironDelay: 1000,
+    ironDelay: 10000,
 
     steelCount: 0,
     steelCost: 10,
     steelLevel: 0,
-    steelDelay: 1000,
+    steelDelay: 30000,
 
     titaniumCount: 0,
     titaniumCost: 10,
     titaniumLevel: 0,
-    titaniumDelay: 1000,
+    titaniumDelay: 120000,
 
     diamondCount: 0,
     diamondCost: 10,
     diamondLevel: 0,
-    diamondDelay: 1000,
+    diamondDelay: 600000,
 
     // Setters & Getters for each ore
     // Coal Setters & Getters

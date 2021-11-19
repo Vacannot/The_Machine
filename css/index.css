@@ -159,6 +159,8 @@ elements whenever there is a lot of text */
 .modalcontent {
     justify-content: space-between;
     background-color: black;
+    left: 0;
+    right: 0;
     margin: auto;
     padding: 20px;
     border: 1px dashed;
