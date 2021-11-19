@@ -47,27 +47,27 @@ const storage = {
     coalCount: 0,
     coalCost: 10,
     coalLevel: 0,
-    coalDelay: 5000,
+    coalDelay: 1000,
 
     ironCount: 0,
     ironCost: 10,
     ironLevel: 0,
-    ironDelay: 10000,
+    ironDelay: 1000,
 
     steelCount: 0,
     steelCost: 10,
     steelLevel: 0,
-    steelDelay: 30000,
+    steelDelay: 1000,
 
     titaniumCount: 0,
     titaniumCost: 10,
     titaniumLevel: 0,
-    titaniumDelay: 120000,
+    titaniumDelay: 1000,
 
     diamondCount: 0,
     diamondCost: 10,
     diamondLevel: 0,
-    diamondDelay: 600000,
+    diamondDelay: 1000,
     // Coal Setters & Getters
     set setCoal(value) {
         this.coalCount = value
@@ -416,11 +416,13 @@ function displayIronCost() {
 }
 
 function unlockIron() {
-
+    let currentIron = storage.getCoal
     let ironLevel = storage.getIronLevel
     if (ironLevel < 1) {
         ironLevel = ironLevel + 1
         storage.setIronLevel = ironLevel
+        currentIron = currentIron - 100
+        storage.setCoal = currentIron
         iron()
         document.getElementById("unlockIron").disabled = true
         document.getElementById("unlockIronCost").classList.add("hidden")
@@ -501,10 +503,16 @@ function displaySteelCost() {
 
 function unlockSteel() {
 
+    let currentIron = storage.getIron
+
     let steelLevel = storage.getSteelLevel
     if (steelLevel < 1) {
         steelLevel = steelLevel + 1
         storage.setSteelLevel = steelLevel
+
+        currentIron = currentIron - 100
+        storage.setIron = currentIron
+
         steel()
         document.getElementById("unlockSteel").disabled = true
         document.getElementById("unlockSteelCost").classList.add("hidden")
@@ -584,11 +592,13 @@ function displayTitaniumCost() {
 }
 
 function unlockTitanium() {
-
+    let currentSteel = storage.getSteel
     let titaniumLevel = storage.getTitaniumLevel
     if (titaniumLevel < 1) {
         titaniumLevel = titaniumLevel + 1
         storage.setTitaniumLevel = titaniumLevel
+        currentSteel = currentSteel - 100
+        storage.setSteel = currentSteel
         titanium()
         document.getElementById("unlockTitanium").disabled = true
         document.getElementById("unlockTitaniumCost").classList.add("hidden")
@@ -669,10 +679,16 @@ function displayDiamondCost() {
 
 function unlockDiamond() {
 
+    let currentTitanium = storage.getTitanium
+
     let diamondLevel = storage.getDiamondLevel
     if (diamondLevel < 1) {
         diamondLevel = diamondLevel + 1
         storage.setDiamondLevel = diamondLevel
+
+        currentTitanium = currentTitanium - 100
+        storage.setTitanium = currentTitanium
+
         diamond()
         document.getElementById("unlockDiamond").disabled = true
         document.getElementById("unlockDiamondCost").classList.add("hidden")
