@@ -1176,6 +1176,7 @@ function password() {
     let answer = document.getElementById("inputAnswer").value
     if (answer == password) {
         alert("You won!")
+        reset()
     }
 }
 
