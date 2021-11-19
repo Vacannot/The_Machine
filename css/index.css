@@ -39,6 +39,15 @@ body {
     border: 1px white dashed;
 }
 
+.Countdown {
+    height: 20px;
+    width: 1000px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
 .Title {
     font-weight: 500;
 }
@@ -55,6 +64,10 @@ body {
     margin-bottom: 80px;
     height: 20px;
     overflow: visible;
+}
+
+.Progressbar {
+    text-align: center;
 }
 
 .options {

@@ -47,27 +47,27 @@ const storage = {
     coalCount: 0,
     coalCost: 10,
     coalLevel: 0,
-    coalDelay: 100,
+    coalDelay: 5000,
 
     ironCount: 0,
     ironCost: 10,
     ironLevel: 0,
-    ironDelay: 100,
+    ironDelay: 10000,
 
     steelCount: 0,
     steelCost: 10,
     steelLevel: 0,
-    steelDelay: 100,
+    steelDelay: 30000,
 
     titaniumCount: 0,
     titaniumCost: 10,
     titaniumLevel: 0,
-    titaniumDelay: 100,
+    titaniumDelay: 120000,
 
     diamondCount: 0,
     diamondCost: 10,
     diamondLevel: 0,
-    diamondDelay: 100,
+    diamondDelay: 600000,
     // Coal Setters & Getters
     set setCoal(value) {
         this.coalCount = value
@@ -204,27 +204,9 @@ const storage = {
 }
 
 function reset() {
-    storage.setCoal = 0
-    storage.setCoalCost = 10
-    storage.setCoalLevel = 0
 
-    storage.setIron = 0
-    storage.setIronCost = 10
-    storage.setIronLevel = 0
+    location.reload()
 
-    storage.setSteel = 0
-    storage.setSteelCost = 10
-    storage.setSteelLevel = 0
-
-    storage.setTitanium = 0
-    storage.setTitaniumCost = 10
-    storage.setTitaniumLevel = 0
-
-    storage.setDiamond = 0
-    storage.setDiamondCost = 10
-    storage.setDiamondLevel = 0
-
-    storage.setGem = 0
 }
 
 function sleep(ms) {
@@ -233,8 +215,8 @@ function sleep(ms) {
 
 function startGame() {
     state = {}
-    reset()
     showTextNode(1)
+    countdownTimer()
 }
 
 function round(number) {
@@ -243,6 +225,42 @@ function round(number) {
 
 function unlockStoryButton() {
     document.getElementById("storyButton").disabled = false
+}
+
+function countdownTimer() {
+    const countTime = new Date()
+    let time = countTime.getTime()
+    time = time + 36000000
+
+
+    // Run myfunc every second
+    setInterval(function() {
+
+        let now = new Date().getTime();
+        let timeleft = time - now;
+
+        // Calculating the days, hours, minutes and seconds left
+        let hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+
+        // Result is output to the specific element
+        document.getElementById("hours").innerHTML = hours + "h "
+        document.getElementById("mins").innerHTML = minutes + "m "
+        document.getElementById("secs").innerHTML = seconds + "s "
+
+
+        // Display the message when countdown is over
+        if (timeleft < 0) {
+
+            document.getElementById("hours").innerHTML = ""
+            document.getElementById("mins").innerHTML = ""
+            document.getElementById("secs").innerHTML = ""
+
+            document.getElementById("timeout").innerHTML = "You're out of time."
+            location.reload();
+        }
+    }, 1000);
 }
 
 
@@ -276,9 +294,6 @@ function upgradeCoal() {
         currentCoal = currentCoal - currentCost
         currentCost = currentCost * 1.5
 
-        displayCoalCost()
-        displayCoal()
-
         storage.setCoal = currentCoal
         storage.setCoalCost = currentCost
         storage.setCoalLevel = currentLevel
@@ -302,7 +317,6 @@ function addCoal() {
     if (storage.getCoal >= 100 && first == false) {
         unlockStoryButton()
         storage.setUnlockedIron = true
-        console.log("You should only do this once dumb computer")
     }
 }
 
@@ -324,6 +338,7 @@ function unlockCoal() {
         storage.setCoalLevel = coalLevel
         coal()
         document.getElementById("unlockCoal").disabled = true
+        document.getElementById("unlockCoalCost").classList.add("hidden")
     }
 }
 
@@ -353,7 +368,7 @@ async function iron() {
 
 function upgradeIron() {
 
-    let currentIron = storage.getIron
+    let currentIron = storage.getCoal
     let currentCost = storage.getIronCost
     let currentLevel = storage.getIronLevel
 
@@ -362,10 +377,7 @@ function upgradeIron() {
         currentIron = currentIron - currentCost
         currentCost = currentCost * 1.5
 
-        displayIronCost()
-        displayIron()
-
-        storage.setIron = currentIron
+        storage.setCoal = currentIron
         storage.setIronCost = currentCost
         storage.setIronLevel = currentLevel
 
@@ -388,7 +400,6 @@ function addIron() {
     if (storage.getIron >= 100 && first == false) {
         unlockStoryButton()
         storage.setUnlockedSteel = true
-        console.log("You should only do this once dumb computer")
     }
 
 
@@ -412,6 +423,7 @@ function unlockIron() {
         storage.setIronLevel = ironLevel
         iron()
         document.getElementById("unlockIron").disabled = true
+        document.getElementById("unlockIronCost").classList.add("hidden")
     }
 }
 
@@ -441,7 +453,7 @@ async function steel() {
 
 function upgradeSteel() {
 
-    let currentSteel = storage.getSteel
+    let currentSteel = storage.getIron
     let currentCost = storage.getSteelCost
     let currentLevel = storage.getSteelLevel
 
@@ -450,10 +462,7 @@ function upgradeSteel() {
         currentSteel = currentSteel - currentCost
         currentCost = currentCost * 1.5
 
-        displaySteelCost()
-        displaySteel()
-
-        storage.setSteel = currentSteel
+        storage.setIron = currentSteel
         storage.setSteelCost = currentCost
         storage.setSteelLevel = currentLevel
 
@@ -475,7 +484,6 @@ function addSteel() {
     if (storage.getSteel >= 100 && first == false) {
         unlockStoryButton()
         storage.setUnlockedTitanium = true
-        console.log("You should only do this once dumb computer")
     }
 
 
@@ -488,7 +496,7 @@ function displaySteel() {
 
 function displaySteelCost() {
     let steelElement = document.getElementById("steelCostText")
-    steelElement.innerText = "Cost: " + (round(storage.getSteelCost)) + " Coal"
+    steelElement.innerText = "Cost: " + (round(storage.getSteelCost)) + " Iron"
 }
 
 function unlockSteel() {
@@ -499,6 +507,7 @@ function unlockSteel() {
         storage.setSteelLevel = steelLevel
         steel()
         document.getElementById("unlockSteel").disabled = true
+        document.getElementById("unlockSteelCost").classList.add("hidden")
     }
 }
 
@@ -528,7 +537,7 @@ async function titanium() {
 
 function upgradeTitanium() {
 
-    let currentTitanium = storage.getTitanium
+    let currentTitanium = storage.getSteel
     let currentCost = storage.getTitaniumCost
     let currentLevel = storage.getTitaniumLevel
 
@@ -537,10 +546,7 @@ function upgradeTitanium() {
         currentTitanium = currentTitanium - currentCost
         currentCost = currentCost * 1.5
 
-        displayTitaniumCost()
-        displayTitanium()
-
-        storage.setTitanium = currentTitanium
+        storage.setSteel = currentTitanium
         storage.setTitaniumCost = currentCost
         storage.setTitaniumLevel = currentLevel
 
@@ -562,7 +568,6 @@ function addTitanium() {
     if (storage.getTitanium >= 100 && first == false) {
         unlockStoryButton()
         storage.setUnlockedDiamond = true
-        console.log("You should only do this once dumb computer")
     }
 
 
@@ -575,7 +580,7 @@ function displayTitanium() {
 
 function displayTitaniumCost() {
     let titaniumElement = document.getElementById("titaniumCostText")
-    titaniumElement.innerText = "Cost: " + (round(storage.getTitaniumCost)) + " Coal"
+    titaniumElement.innerText = "Cost: " + (round(storage.getTitaniumCost)) + " Steel"
 }
 
 function unlockTitanium() {
@@ -586,6 +591,7 @@ function unlockTitanium() {
         storage.setTitaniumLevel = titaniumLevel
         titanium()
         document.getElementById("unlockTitanium").disabled = true
+        document.getElementById("unlockTitaniumCost").classList.add("hidden")
     }
 }
 
@@ -615,7 +621,7 @@ async function diamond() {
 
 function upgradeDiamond() {
 
-    let currentDiamond = storage.getDiamond
+    let currentDiamond = storage.getTitanium
     let currentCost = storage.getDiamondCost
     let currentLevel = storage.getDiamondLevel
 
@@ -624,10 +630,7 @@ function upgradeDiamond() {
         currentDiamond = currentDiamond - currentCost
         currentCost = currentCost * 1.5
 
-        displayDiamondCost()
-        displayDiamond()
-
-        storage.setDiamond = currentDiamond
+        storage.setTitanium = currentDiamond
         storage.setDiamondCost = currentCost
         storage.setDiamondLevel = currentLevel
 
@@ -646,12 +649,9 @@ function addDiamond() {
 
     let first = storage.getUnlockedGem
 
-    console.log("--")
-
     if (storage.getDiamond >= 100 && first == false) {
         unlockStoryButton()
         storage.setUnlockedGem = true
-        console.log("Gem Unlocked")
     }
 
 
@@ -664,7 +664,7 @@ function displayDiamond() {
 
 function displayDiamondCost() {
     let diamondElement = document.getElementById("diamondCostText")
-    diamondElement.innerText = "Cost: " + (round(storage.getDiamondCost)) + " Coal"
+    diamondElement.innerText = "Cost: " + (round(storage.getDiamondCost)) + " Titanium"
 }
 
 function unlockDiamond() {
@@ -675,6 +675,7 @@ function unlockDiamond() {
         storage.setDiamondLevel = diamondLevel
         diamond()
         document.getElementById("unlockDiamond").disabled = true
+        document.getElementById("unlockDiamondCost").classList.add("hidden")
     }
 }
 
@@ -688,10 +689,10 @@ function unlockDiamondButton() {
 
 function storyEvents(textNodeIndex) {
 
+
     if (textNodeIndex == 100) {
         let nameElement = document.getElementById("name")
         nameElement.innerText = ""
-
     } else if (textNodeIndex == 6) {
         let playerNamePrompt = prompt("Enter your name")
         playerName = playerNamePrompt
@@ -714,7 +715,9 @@ function storyEvents(textNodeIndex) {
     } else if (textNodeIndex == 17) {
         document.getElementById("storyButton").disabled = true
         unlockDiamondButton()
-    } else {}
+    } else {
+
+    }
 }
 
 function showTextNode(textNodeIndex) {
@@ -744,7 +747,7 @@ function showOption(option) {
 function selectOption(option) {
     const nextTextNodeId = option.nextText
     if (nextTextNodeId <= 0) {
-        return startGame()
+        return reset()
     }
     state = Object.assign(state, option.setState)
     showTextNode(nextTextNodeId)

@@ -38,6 +38,12 @@
                 <div class="Title">The Machine</div>
                 <div class="Settings"><i class="fas fa-cog"></i></div>
             </div>
+            <div class="Countdown SmallText">
+                <div class="hours" id="hours">10h</div>
+                <div class="minutes" id="mins">0m</div>
+                <div class="seconds" id="secs">0s</div>
+                <div class="timeout" id="timeout"></div>
+            </div>
 
 
 
@@ -73,7 +79,7 @@
                 <!-- This is where the options to buy upgrades and unlocking new materials for speeding up production are-->
                 <div class="ButtonOrganizer">
                     <div class="CoalContainer flex column">
-                        <div class="Progressbar">ProgressbarCoal</div>
+                        <div class="Progressbar">Coal</div>
                         <div class="Amount SmallText flex justifycenter" id="coalSumText">Amount: 0</div>
                         <button class="UpgradeCoal button" id="upgradeCoal" onclick="upgradeCoal()" disabled>Upgrade</button>
                         <div class="CostAmount SmallText flex justifycenter" id="coalCostText">Cost: 10 Coal</div>
@@ -82,39 +88,39 @@
                     </div>
 
                     <div class="IronContainer flex column justifycenter">
-                        <div class="Progressbar">ProgressbarCoal</div>
+                        <div class="Progressbar">Iron</div>
                         <div class="Amount SmallText flex justifycenter" id="ironSumText">Amount: 0</div>
                         <button class="UpgradeIron button" id="upgradeIron" onclick="upgradeIron()" disabled>Upgrade</button>
-                        <div class="CostAmount SmallText flex justifycenter" id="ironCostText">Cost: 10 Iron</div>
+                        <div class="CostAmount SmallText flex justifycenter" id="ironCostText">Cost: 10 Coal</div>
                         <button class="UnlockIron button" id="unlockIron" onclick="unlockIron()" disabled>Unlock Iron</button>
                         <div class="CostText SmallText flex justifycenter" id="unlockIronCost">Cost: 100 Coal</div>
                     </div>
 
                     <div class="SteelContainer flex column">
-                        <div class="Progressbar">ProgressbarCoal</div>
+                        <div class="Progressbar">Steel</div>
                         <div class="Amount SmallText flex justifycenter" id="steelSumText">Amount: 0</div>
                         <button class="UpgradeSteel button" id="upgradeSteel" onclick="upgradeSteel()" disabled>Upgrade</button>
-                        <div class="CostAmount SmallText flex justifycenter" id="steelCostText">Cost: 10 Steel</div>
+                        <div class="CostAmount SmallText flex justifycenter" id="steelCostText">Cost: 10 Iron</div>
                         <button class="UnlockSteel button" id="unlockSteel" onclick="unlockSteel()" disabled>Unlock Steel</button>
                         <div class="CostText SmallText flex justifycenter" id="unlockSteelCost">Cost: 100 Iron</div>
                     </div>
 
                     <div class="TitaniumContainer flex column">
-                        <div class="Progressbar">ProgressbarCoal</div>
+                        <div class="Progressbar">Titanium</div>
                         <div class="Amount SmallText flex justifycenter" id="titaniumSumText">Amount: 0</div>
                         <button class="UpgradeTitanium button" id="upgradeTitanium" onclick="upgradeTitanium()" disabled>Upgrade</button>
-                        <div class="CostAmount SmallText flex justifycenter" id="titaniumCostText">Cost: 10 Titanium</div>
+                        <div class="CostAmount SmallText flex justifycenter" id="titaniumCostText">Cost: 10 Steel</div>
                         <button class="UnlockTitanium button" id="unlockTitanium" onclick="unlockTitanium()" disabled>Unlock Titanium</button>
-                        <div class="CostText SmallText flex justifycenter" id="unlockTitaniumText">Cost: 100 Steel</div>
+                        <div class="CostText SmallText flex justifycenter" id="unlockTitaniumCost">Cost: 100 Steel</div>
                     </div>
 
                     <div class="DiamondContainer flex column">
-                        <div class="Progressbar">ProgressbarCoal</div>
+                        <div class="Progressbar">Diamond</div>
                         <div class="Amount SmallText flex justifycenter" id="diamondSumText">Amount: 0</div>
                         <button class="UpgradeDiamond button" id="upgradeDiamond" onclick="upgradeDiamond()" disabled>Upgrade</button>
-                        <div class="CostAmount SmallText flex justifycenter" id="diamondCostText">Cost: 10 Diamond</div>
+                        <div class="CostAmount SmallText flex justifycenter" id="diamondCostText">Cost: 10 Titanium</div>
                         <button class="UnlockDiamond button" id="unlockDiamond" onclick="unlockDiamond()" disabled>Unlock Diamond</button>
-                        <div class="CostText SmallText flex justifycenter" id="unlockDiamondText">Cost: 100 Titanium</div>
+                        <div class="CostText SmallText flex justifycenter" id="unlockDiamondCost">Cost: 100 Titanium</div>
                     </div>
                 </div>
             </div>
