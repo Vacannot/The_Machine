@@ -441,7 +441,7 @@ function upgradeIron() {
         storage.setIronLevel = currentLevel
 
         displayIronCost()
-        displayIron()
+        displayCoal()
     } else {
         alert("You don't have enough iron to afford this upgrade")
     }
@@ -547,7 +547,7 @@ function upgradeSteel() {
         storage.setSteelLevel = currentLevel
 
         displaySteelCost()
-        displaySteel()
+        displayIron()
     } else {
         alert("You don't have enough steel to afford this upgrade")
     }
@@ -656,7 +656,7 @@ function upgradeTitanium() {
         storage.setTitaniumLevel = currentLevel
 
         displayTitaniumCost()
-        displayTitanium()
+        displaySteel()
     } else {
         alert("You don't have enough titanium to afford this upgrade")
     }
@@ -761,7 +761,7 @@ function upgradeDiamond() {
         storage.setDiamondLevel = currentLevel
 
         displayDiamondCost()
-        displayDiamond()
+        displayTitanium()
     } else {
         alert("You don't have enough diamond to afford this upgrade")
     }
@@ -899,6 +899,7 @@ function selectOption(option) {
     }
     showTextNode(nextTextNodeId)
 }
+
 /**
  * Array of the different node stages that the user can navigate through and their corresponding optional paths
  */
