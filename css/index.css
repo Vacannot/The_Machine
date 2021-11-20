@@ -133,7 +133,7 @@ elements whenever there is a lot of text */
 }
 
 
-/* sets margin beneath the CostCurrent sum of the current ores */
+/* sets margin beneath the CostCurrent sum of the current ores, very najs */
 
 .CostAmount {
     margin-bottom: 10px;
