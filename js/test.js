@@ -413,7 +413,7 @@ async function iron() {
         ironLevel = storage.getIronLevel
         ironTimer = storage.getIronDelay
 
-        ironTimer = ironTimer * (0.9 ** ironLevel)
+        ironTimer = ironTimer * (0.8 ** ironLevel)
         addIron()
 
         await sleep(ironTimer)
@@ -443,7 +443,7 @@ function upgradeIron() {
         displayIronCost()
         displayCoal()
     } else {
-        alert("You don't have enough iron to afford this upgrade")
+        alert("You don't have enough coal to afford this upgrade")
     }
 }
 /**
@@ -519,7 +519,7 @@ async function steel() {
         steelLevel = storage.getSteelLevel
         steelTimer = storage.getSteelDelay
 
-        steelTimer = steelTimer * (0.9 ** steelLevel)
+        steelTimer = steelTimer * (0.8 ** steelLevel)
         addSteel()
 
         await sleep(steelTimer)
@@ -549,7 +549,7 @@ function upgradeSteel() {
         displaySteelCost()
         displayIron()
     } else {
-        alert("You don't have enough steel to afford this upgrade")
+        alert("You don't have enough iron to afford this upgrade")
     }
 }
 /**
@@ -628,7 +628,7 @@ async function titanium() {
         titaniumLevel = storage.getTitaniumLevel
         titaniumTimer = storage.getTitaniumDelay
 
-        titaniumTimer = titaniumTimer * (0.9 ** titaniumLevel)
+        titaniumTimer = titaniumTimer * (0.8 ** titaniumLevel)
         addTitanium()
 
         await sleep(titaniumTimer)
@@ -658,7 +658,7 @@ function upgradeTitanium() {
         displayTitaniumCost()
         displaySteel()
     } else {
-        alert("You don't have enough titanium to afford this upgrade")
+        alert("You don't have enough steel to afford this upgrade")
     }
 }
 /**
@@ -733,7 +733,7 @@ async function diamond() {
         diamondLevel = storage.getDiamondLevel
         diamondTimer = storage.getDiamondDelay
 
-        diamondTimer = diamondTimer * (0.9 ** diamondLevel)
+        diamondTimer = diamondTimer * (0.8 ** diamondLevel)
         addDiamond()
 
         await sleep(diamondTimer)
@@ -763,7 +763,7 @@ function upgradeDiamond() {
         displayDiamondCost()
         displayTitanium()
     } else {
-        alert("You don't have enough diamond to afford this upgrade")
+        alert("You don't have enough titanium to afford this upgrade")
     }
 }
 /**
