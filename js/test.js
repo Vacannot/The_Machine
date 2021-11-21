@@ -388,6 +388,7 @@ function unlockCoal() {
         coal()
         document.getElementById("unlockCoal").disabled = true
         document.getElementById("unlockCoalCost").classList.add("hidden")
+        document.getElementById("upgradeCoal").disabled = false
     }
 }
 /**
@@ -395,7 +396,7 @@ function unlockCoal() {
  */
 function unlockCoalButton() {
     document.getElementById("unlockCoal").disabled = false
-    document.getElementById("upgradeCoal").disabled = false
+
 }
 
 // Iron logic
@@ -494,6 +495,7 @@ function unlockIron() {
         iron()
         document.getElementById("unlockIron").disabled = true
         document.getElementById("unlockIronCost").classList.add("hidden")
+        document.getElementById("upgradeIron").disabled = false
     }
 }
 /**
@@ -501,7 +503,6 @@ function unlockIron() {
  */
 function unlockIronButton() {
     document.getElementById("unlockIron").disabled = false
-    document.getElementById("upgradeIron").disabled = false
 }
 
 // Steel logic
@@ -603,6 +604,7 @@ function unlockSteel() {
         steel()
         document.getElementById("unlockSteel").disabled = true
         document.getElementById("unlockSteelCost").classList.add("hidden")
+        document.getElementById("upgradeSteel").disabled = false
     }
 }
 /**
@@ -610,7 +612,7 @@ function unlockSteel() {
  */
 function unlockSteelButton() {
     document.getElementById("unlockSteel").disabled = false
-    document.getElementById("upgradeSteel").disabled = false
+
 }
 
 // Titanium logic
@@ -708,6 +710,7 @@ function unlockTitanium() {
         titanium()
         document.getElementById("unlockTitanium").disabled = true
         document.getElementById("unlockTitaniumCost").classList.add("hidden")
+        document.getElementById("upgradeTitanium").disabled = false
     }
 }
 /**
@@ -715,7 +718,7 @@ function unlockTitanium() {
  */
 function unlockTitaniumButton() {
     document.getElementById("unlockTitanium").disabled = false
-    document.getElementById("upgradeTitanium").disabled = false
+
 }
 
 // Diamond logic
@@ -817,6 +820,7 @@ function unlockDiamond() {
         diamond()
         document.getElementById("unlockDiamond").disabled = true
         document.getElementById("unlockDiamondCost").classList.add("hidden")
+        document.getElementById("upgradeDiamond").disabled = false
     }
 }
 /**
@@ -824,7 +828,6 @@ function unlockDiamond() {
  */
 function unlockDiamondButton() {
     document.getElementById("unlockDiamond").disabled = false
-    document.getElementById("upgradeDiamond").disabled = false
 }
 
 // Story logic
